@@ -1,0 +1,84 @@
+<div class="container">
+  <h2 class="text-center mb-4">📚 Gestión de Carreras</h2>
+
+  <!-- Formulario -->
+  <div class="card shadow mb-4">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0">
+        {{ carreraSeleccionada ? '✏️ Editar Carrera' : 'Agregar Nueva Carrera' }}
+      </h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="guardarCarrera()" #carreraForm="ngForm">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <input [(ngModel)]="nuevaCarrera.nombre" name="nombre" 
+                   class="form-control" placeholder="Nombre de la carrera" required>
+          </div>
+          <div class="col-md-3">
+            <input [(ngModel)]="nuevaCarrera.codigo" name="codigo" 
+                   class="form-control" placeholder="Código" required>
+          </div>
+          <div class="col-md-3">
+            <input [(ngModel)]="nuevaCarrera.duracion" name="duracion" type="number"
+                   class="form-control" placeholder="Duración (semestres)" required>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <button type="submit" class="btn btn-success">
+            {{ carreraSeleccionada ? '🔄 Actualizar' : '✅ Agregar' }} Carrera
+          </button>
+          <button type="button" *ngIf="carreraSeleccionada" 
+                  (click)="cancelarEdicion()" class="btn btn-secondary ms-2">
+            ❌ Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lista de carreras -->
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">📋 Lista de Carreras ({{ carreras.length }})</h5>
+    </div>
+    <div class="card-body">
+      <div *ngIf="carreras.length === 0" class="text-center py-4 text-muted">
+        <p>No hay carreras registradas aún.</p>
+      </div>
+
+      <table *ngIf="carreras.length > 0" class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Código</th>
+            <th>Duración</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let carrera of carreras; let i = index">
+            <td class="fw-bold">{{ i + 1 }}</td>
+            <td>{{ carrera.nombre }}</td>
+            <td>
+              <span class="badge bg-primary">{{ carrera.codigo }}</span>
+            </td>
+            <td>
+              <span class="badge bg-info">{{ carrera.duracion }} semestres</span>
+            </td>
+            <td>
+              <button (click)="editarCarrera(carrera)" class="btn btn-warning btn-sm me-1">
+                ✏️
+              </button>
+              <button (click)="eliminarCarrera(carrera.id)" class="btn btn-danger btn-sm">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
