@@ -1,1 +1,23 @@
-<p>agregar-alumno works!</p>
+<h2>Agregar Alumno</h2>
+
+<form (ngSubmit)="guardar()">
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="alumno.nombre" name="nombre" required />
+
+  <label>Apellido:</label>
+  <input type="text" [(ngModel)]="alumno.apellido" name="apellido" required />
+
+  <label>Email:</label>
+  <input type="email" [(ngModel)]="alumno.email" name="email" />
+
+  <label>Documento:</label>
+  <input type="text" [(ngModel)]="alumno.documento" name="documento" required />
+
+  <label>Fecha de nacimiento:</label>
+  <input type="date" [(ngModel)]="alumno.fecha_nacimiento" name="fecha_nacimiento" />
+
+  <label>Teléfono:</label>
+  <input type="text" [(ngModel)]="alumno.telefono" name="telefono" />
+
+  <button type="submit">Guardar</button>
+</form>

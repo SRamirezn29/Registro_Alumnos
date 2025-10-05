@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class AlumnosService {
   private apiUrl = 'http://localhost/Registro_Alumnos-main/backend/alumnos.php'; 
-  // Cambiar la ruta a donde esten los archivos PHP
+  // Ajusta la ruta a donde estén tus PHP
+
+  private jsonHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) {}
 
@@ -21,13 +23,21 @@ export class AlumnosService {
     return this.http.get(`${this.apiUrl}?id_alumno=${id_alumno}`);
   }
 
-  // Editar un alumno existente
-  editarAlumno(alumno: any): Observable<any> {
-    return this.http.put(this.apiUrl, alumno);
+  // >>> AGREGAR alumno (POST)
+  crearAlumno(alumno: any): Observable<any> {
+    return this.http.post(this.apiUrl, alumno, { headers: this.jsonHeaders });
   }
 
-  // Eliminar un alumno
+  // Editar un alumno existente (PUT)
+  editarAlumno(alumno: any): Observable<any> {
+    return this.http.put(this.apiUrl, alumno, { headers: this.jsonHeaders });
+  }
+
+  // Eliminar un alumno (DELETE con body)
   eliminarAlumno(id_alumno: number): Observable<any> {
-    return this.http.delete(this.apiUrl, { body: { id_alumno } });
+    return this.http.delete(this.apiUrl, {
+      body: { id_alumno },
+      headers: this.jsonHeaders
+    });
   }
 }
