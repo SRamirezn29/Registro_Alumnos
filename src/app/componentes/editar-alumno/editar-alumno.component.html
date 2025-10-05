@@ -1,1 +1,22 @@
-<p>editar-alumno works!</p>
+<h2>Editar Alumno</h2>
+<form (ngSubmit)="guardarCambios()">
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="alumno.nombre" name="nombre" />
+
+  <label>Apellido:</label>
+  <input type="text" [(ngModel)]="alumno.apellido" name="apellido" />
+
+  <label>Email:</label>
+  <input type="email" [(ngModel)]="alumno.email" name="email" />
+
+  <label>Documento:</label>
+  <input type="text" [(ngModel)]="alumno.documento" name="documento" />
+
+  <label>Fecha de nacimiento:</label>
+  <input type="date" [(ngModel)]="alumno.fecha_nacimiento" name="fecha_nacimiento" />
+
+  <label>Teléfono:</label>
+  <input type="text" [(ngModel)]="alumno.telefono" name="telefono" />
+
+  <button type="submit">Guardar Cambios</button>
+</form>
