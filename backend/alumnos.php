@@ -36,7 +36,7 @@ switch ($method) {
     case 'POST': 
         $data = json_decode(file_get_contents("php://input"), true);
 
-        // Validaciones mínimas (ajusta a tus reglas)
+        // Validaciones mínimas
         $requeridos = ['nombre','apellido','documento'];
         foreach ($requeridos as $f) {
             if (empty($data[$f])) {
